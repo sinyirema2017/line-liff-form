@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>客服表單</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h3>您好！感謝您聯繫華和資產，請您填寫以下資訊，我們將由專人為您回覆：</h3>
+
+  <p id="status">載入中...</p>
+
+  <p>1. 諮詢事由：</p>
+  <label><input type="radio" name="reason" value="房屋保固期間報修申請" checked> 房屋保固期間報修申請</label><br>
+  <label><input type="radio" name="reason" value="都更合建需求"> 都更合建需求</label><br>
+  <label><input type="radio" name="reason" value="其他"> 其他</label><br><br>
+
+  <label>2. 姓名：</label><br>
+  <input id="name" type="text"><br><br>
+
+  <label>3. 電話：</label><br>
+  <input id="phone" type="tel"><br><br>
+
+  <label>4. 需求簡述：</label><br>
+  <textarea id="request" rows="5"></textarea><br><br>
+
+  <button onclick="submitForm()">送出表單</button>
+
+  <script>
+    async function main() {
+      try {
+        await liff.init({ liffId: "你的_LIFF_ID" });
+        document.getElementById("status").innerText = "LIFF 載入成功";
+
+        if (!liff.isLoggedIn()) {
+          liff.login();
+        }
+      } catch (error) {
+        document.getElementById("status").innerText = "LIFF 載入失敗：" + error.message;
+        console.error(error);
+      }
+    }
+
+    async function submitForm() {
+      const reason = document.querySelector('input[name="reason"]:checked').value;
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const request = document.getElementById("request").value.trim();
+
+      if (!name || !phone || !request) {
+        alert("請填寫姓名、電話與需求簡述");
+        return;
+      }
+
+      const text =
+`【客戶表單】
+
+諮詢事由：${reason}
+姓名：${name}
+電話：${phone}
+需求簡述：
+${request}`;
+
+      try {
+        await liff.sendMessages([{ type: "text", text }]);
+        alert("已送出，請回到聊天室確認");
+        liff.closeWindow();
+      } catch (error) {
+        alert("送出失敗：" + error.message);
+        console.error(error);
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>
