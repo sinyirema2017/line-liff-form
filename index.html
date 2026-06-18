@@ -170,20 +170,22 @@
     </div>
   </div>
 
-  <script>
-    async function main() {
-      try {
-        await liff.init({ liffId: "2010301982-W9csNsdj" });
-        document.getElementById("status").innerText = "LIFF 載入成功";
+ <script>
+  async function main() {
+    try {
+      await liff.init({ liffId: "你的新LIFF_ID" });
 
-        if (!liff.isLoggedIn()) {
-          liff.login();
-        }
-      } catch (error) {
-        document.getElementById("status").innerText = "LIFF 載入失敗：" + error.message;
+      if (!liff.isLoggedIn()) {
+        liff.login();
+        return;
       }
-    }
 
+      document.getElementById("status").innerText = "LIFF 載入成功";
+    } catch (error) {
+      document.getElementById("status").innerText = "LIFF 載入失敗：" + error.message;
+    }
+  }
+ <script>
     async function submitForm() {
       const reason = document.querySelector('input[name="reason"]:checked').value;
       const name = document.getElementById("name").value.trim();
