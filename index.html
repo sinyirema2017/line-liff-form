@@ -3,29 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>客服表單</title>
+  <title>華和資產客服表單</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: #f5f7fb;
+      font-family: Arial, "Noto Sans TC", sans-serif;
+      color: #222;
+    }
+
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: #0f5132;
+    }
+
+    .intro {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .status {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 16px;
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    .label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .radio-group label {
+      display: block;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: #06c755;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      opacity: 0.8;
+    }
+
+    .notice {
+      margin-top: 24px;
+      padding: 18px;
+      background: #fff8e1;
+      border-left: 5px solid #f2c94c;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 18px;
+      color: #666;
+      font-size: 13px;
+    }
+  </style>
 </head>
+
 <body>
-  <h3>您好！感謝您聯繫華和資產，請您填寫以下資訊，我們將由專人為您回覆：</h3>
+  <div class="container">
+    <div class="card">
+      <h1>華和資產客服表單</h1>
 
-  <p id="status">載入中...</p>
+      <div class="intro">
+        您好！感謝您聯繫華和資產，請您填寫以下資訊，我們將由專人為您回覆。
+      </div>
 
-  <p>1. 諮詢事由：</p>
-  <label><input type="radio" name="reason" value="房屋保固期間報修申請" checked> 房屋保固期間報修申請</label><br>
-  <label><input type="radio" name="reason" value="都更合建需求"> 都更合建需求</label><br>
-  <label><input type="radio" name="reason" value="其他"> 其他</label><br><br>
+      <div id="status" class="status">LIFF 載入中...</div>
 
-  <label>2. 姓名：</label><br>
-  <input id="name" type="text"><br><br>
+      <div class="field">
+        <span class="label">1. 諮詢事由</span>
+        <div class="radio-group">
+          <label><input type="radio" name="reason" value="房屋保固期間報修申請" checked> 房屋保固期間報修申請</label>
+          <label><input type="radio" name="reason" value="都更合建需求"> 都更合建需求</label>
+          <label><input type="radio" name="reason" value="其他"> 其他</label>
+        </div>
+      </div>
 
-  <label>3. 電話：</label><br>
-  <input id="phone" type="tel"><br><br>
+      <div class="field">
+        <label class="label">2. 姓名</label>
+        <input id="name" type="text" placeholder="請輸入您的姓名">
+      </div>
 
-  <label>4. 需求簡述：</label><br>
-  <textarea id="request" rows="5"></textarea><br><br>
+      <div class="field">
+        <label class="label">3. 電話</label>
+        <input id="phone" type="tel" placeholder="請輸入您的聯絡電話">
+      </div>
 
-  <button onclick="submitForm()">送出表單</button>
+      <div class="field">
+        <label class="label">4. 需求簡述</label>
+        <textarea id="request" placeholder="請簡單描述您的需求"></textarea>
+      </div>
+
+      <button onclick="submitForm()">送出表單</button>
+
+      <div class="notice">
+        <strong>《提醒》</strong><br>
+        若為房屋保固之修繕需求，請同步傳送報修處的照片或影片，以利工程人員初步判斷屋況。<br><br>
+
+        🕒 <strong>【服務時間】</strong><br>
+        週一至週五 08:00-17:00，若於非上班時間留言，我們將於次一工作日聯繫。<br><br>
+
+        🚨 <strong>緊急狀況：</strong>
+        若遇水電瓦斯等即時問題，請優先撥打物業管理室電話以策安全。
+      </div>
+
+      <div class="footer">
+        華和資產｜誠信 服務 穩健 永續
+      </div>
+    </div>
+  </div>
 
   <script>
     async function main() {
@@ -38,7 +181,6 @@
         }
       } catch (error) {
         document.getElementById("status").innerText = "LIFF 載入失敗：" + error.message;
-        console.error(error);
       }
     }
 
@@ -63,12 +205,14 @@
 ${request}`;
 
       try {
-        await liff.sendMessages([{ type: "text", text }]);
+        await liff.sendMessages([
+          { type: "text", text: text }
+        ]);
+
         alert("已送出，請回到聊天室確認");
         liff.closeWindow();
       } catch (error) {
         alert("送出失敗：" + error.message);
-        console.error(error);
       }
     }
 
