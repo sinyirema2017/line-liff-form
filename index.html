@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>華和資產客服表單</title>
+
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      background: #f5f7fb;
+      background: #f4f6f9;
       font-family: Arial, "Noto Sans TC", sans-serif;
       color: #222;
     }
@@ -21,28 +26,36 @@
     }
 
     .card {
-      background: #fff;
-      border-radius: 16px;
+      background: #ffffff;
+      border-radius: 18px;
       padding: 24px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 6px 22px rgba(0,0,0,0.08);
     }
 
     h1 {
-      font-size: 22px;
-      margin-bottom: 12px;
+      text-align: center;
       color: #0f5132;
+      font-size: 24px;
+      margin: 0 0 12px;
     }
 
     .intro {
+      text-align: center;
+      color: #555;
+      line-height: 1.8;
       font-size: 15px;
-      line-height: 1.7;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
     .status {
-      font-size: 13px;
-      color: #777;
-      margin-bottom: 16px;
+      background: #f0fff4;
+      color: #198754;
+      border: 1px solid #cce5d8;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 22px;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
     .field {
@@ -52,64 +65,65 @@
     .label {
       display: block;
       font-weight: bold;
-      margin-bottom: 8px;
       font-size: 16px;
+      margin-bottom: 8px;
     }
 
-    .radio-group label {
+    .radio-box {
       display: block;
-      padding: 10px 12px;
-      margin-bottom: 8px;
       border: 1px solid #ddd;
-      border-radius: 10px;
       background: #fafafa;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 15px;
     }
 
     input[type="text"],
     input[type="tel"],
     textarea {
       width: 100%;
-      box-sizing: border-box;
-      padding: 13px;
+      padding: 14px;
       border: 1px solid #ccc;
       border-radius: 10px;
       font-size: 16px;
+      font-family: inherit;
     }
 
     textarea {
-      min-height: 110px;
+      min-height: 120px;
       resize: vertical;
     }
 
-    button {
+    .btn {
       width: 100%;
-      padding: 15px;
-      background: #06c755;
-      color: white;
+      padding: 16px;
       border: none;
       border-radius: 12px;
-      font-size: 17px;
+      background: #06c755;
+      color: white;
+      font-size: 18px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    button:active {
+    .btn:active {
       opacity: 0.8;
     }
 
     .notice {
       margin-top: 24px;
-      padding: 18px;
       background: #fff8e1;
-      border-left: 5px solid #f2c94c;
+      border-left: 5px solid #f4c542;
       border-radius: 10px;
+      padding: 16px;
+      line-height: 1.9;
       font-size: 14px;
-      line-height: 1.8;
     }
 
     .footer {
+      margin-top: 20px;
       text-align: center;
-      margin-top: 18px;
       color: #666;
       font-size: 13px;
     }
@@ -117,23 +131,37 @@
 </head>
 
 <body>
+
   <div class="container">
     <div class="card">
+
       <h1>華和資產客服表單</h1>
 
       <div class="intro">
         您好！感謝您聯繫華和資產，請您填寫以下資訊，我們將由專人為您回覆。
       </div>
 
-      <div id="status" class="status">LIFF 載入中...</div>
+      <div id="status" class="status">
+        LIFF 初始化中，請稍候...
+      </div>
 
       <div class="field">
         <span class="label">1. 諮詢事由</span>
-        <div class="radio-group">
-          <label><input type="radio" name="reason" value="房屋保固期間報修申請" checked> 房屋保固期間報修申請</label>
-          <label><input type="radio" name="reason" value="都更合建需求"> 都更合建需求</label>
-          <label><input type="radio" name="reason" value="其他"> 其他</label>
-        </div>
+
+        <label class="radio-box">
+          <input type="radio" name="reason" value="房屋保固期間報修申請" checked>
+          房屋保固期間報修申請
+        </label>
+
+        <label class="radio-box">
+          <input type="radio" name="reason" value="都更合建需求">
+          都更合建需求
+        </label>
+
+        <label class="radio-box">
+          <input type="radio" name="reason" value="其他">
+          其他
+        </label>
       </div>
 
       <div class="field">
@@ -151,7 +179,9 @@
         <textarea id="request" placeholder="請簡單描述您的需求"></textarea>
       </div>
 
-      <button onclick="submitForm()">送出表單</button>
+      <button class="btn" onclick="submitForm()">
+        送出表單
+      </button>
 
       <div class="notice">
         <strong>《提醒》</strong><br>
@@ -160,45 +190,62 @@
         🕒 <strong>【服務時間】</strong><br>
         週一至週五 08:00-17:00，若於非上班時間留言，我們將於次一工作日聯繫。<br><br>
 
-        🚨 <strong>緊急狀況：</strong>
+        🚨 <strong>緊急狀況：</strong><br>
         若遇水電瓦斯等即時問題，請優先撥打物業管理室電話以策安全。
       </div>
 
       <div class="footer">
         華和資產｜誠信 服務 穩健 永續
       </div>
+
     </div>
   </div>
 
- <script>
-  async function main() {
-    try {
-      await liff.init({ liffId: "2010301982-W9csNsdj" });
+  <script>
+    const LIFF_ID = "2010301982-W9csNsdj";
 
-      if (!liff.isLoggedIn()) {
-        liff.login();
-        return;
+    async function main() {
+      try {
+        await liff.init({
+          liffId: LIFF_ID
+        });
+
+        if (!liff.isLoggedIn()) {
+          document.getElementById("status").innerHTML = "尚未登入 LINE，正在導向授權畫面...";
+          liff.login();
+          return;
+        }
+
+        document.getElementById("status").innerHTML = "✅ LINE 已登入，可以填寫表單";
+
+      } catch (error) {
+        document.getElementById("status").innerHTML =
+          "❌ LIFF 初始化失敗：<br>" + error.message;
       }
-
-      document.getElementById("status").innerText = "LIFF 載入成功";
-    } catch (error) {
-      document.getElementById("status").innerText = "LIFF 載入失敗：" + error.message;
     }
-  }
- <script>
+
     async function submitForm() {
-      const reason = document.querySelector('input[name="reason"]:checked').value;
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const request = document.getElementById("request").value.trim();
+      alert("開始送出表單");
 
-      if (!name || !phone || !request) {
-        alert("請填寫姓名、電話與需求簡述");
-        return;
-      }
+      try {
+        if (!liff.isLoggedIn()) {
+          alert("尚未登入 LINE，請重新開啟表單");
+          liff.login();
+          return;
+        }
 
-      const text =
-`【客戶表單】
+        const reason = document.querySelector('input[name="reason"]:checked').value;
+        const name = document.getElementById("name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const request = document.getElementById("request").value.trim();
+
+        if (!name || !phone || !request) {
+          alert("請完整填寫姓名、電話與需求簡述");
+          return;
+        }
+
+        const text =
+`【華和資產客服表單】
 
 諮詢事由：${reason}
 姓名：${name}
@@ -206,19 +253,26 @@
 需求簡述：
 ${request}`;
 
-      try {
         await liff.sendMessages([
-          { type: "text", text: text }
+          {
+            type: "text",
+            text: text
+          }
         ]);
 
-        alert("已送出，請回到聊天室確認");
-        liff.closeWindow();
+        alert("表單已送出，請回到聊天室確認");
+
+        if (liff.isInClient()) {
+          liff.closeWindow();
+        }
+
       } catch (error) {
-        alert("送出失敗：" + error.message);
+        alert("送出失敗：\n\n" + error.message);
       }
     }
 
     main();
   </script>
+
 </body>
 </html>
